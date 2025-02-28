@@ -15,6 +15,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Lang;
+use Carbon\Carbon;
 
 class RegisteredUserController extends Controller
 {
@@ -39,16 +40,30 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        if ($request->missing('token')) 
+        {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
+        }else{
+            $invite = Invite::where('token', $request->token)->first();
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $invite->email,
+                'password' => Hash::make($request->password),
+                'locale' => $invite->locale,
+                'email_verified_at' => Carbon::now()
+            ]);
+
+            $user->assignRole($invite->role);
+            $invite->delete();
+        }
+        
         event(new Registered($user));
-
         Auth::login($user);
-
         return to_route('dashboard');
     }
 
