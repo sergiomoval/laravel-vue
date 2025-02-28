@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invite;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Lang;
 
 class RegisteredUserController extends Controller
 {
@@ -47,5 +50,17 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return to_route('dashboard');
+    }
+
+    public function registration($token)
+    {
+        try {
+            Invite::where('token', $token)->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('login')->with('error', Lang::get('Wrong invitation token! Please check'));
+        }
+
+        $invite = Invite::where('token', $token)->first();
+        return Inertia::render('auth/RegisterInvite', ['invite' => $invite, 'token' => $token]);
     }
 }

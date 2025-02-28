@@ -95,7 +95,7 @@ const columns: ColumnDef<typeof UserModel>[] = [
         <div class="flex justify-end mb-4">
           <Button as-child>
             <Link :href="route('administration.users.create')">
-              <Plus class="w-4 h-4 mr-2" /> {{ $t('New User') }}
+              <Plus class="w-4 h-4 mr-2" /> {{ $t('New :object', { object: $t('User') }) }}
             </Link>
           </Button>
         </div>

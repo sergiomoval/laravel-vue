@@ -14,6 +14,7 @@ Route::get('dashboard', function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('administration/users/data-table', [App\Http\Controllers\Administration\UsersController::class, 'dataTable'])->name('administration.users.data-table');
+    Route::post('administration/users/invite', [App\Http\Controllers\Administration\UsersController::class, 'invite'])->name('administration.users.invite');
     Route::resource('administration/users', App\Http\Controllers\Administration\UsersController::class, ['as' => 'administration']);
 });
 

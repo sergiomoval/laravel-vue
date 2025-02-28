@@ -5,6 +5,7 @@ import Heading from '@/components/Heading.vue';
 import { trans } from 'laravel-vue-i18n';
 import { type BreadcrumbItem } from '@/types';
 import FormCreate from './partials/FormCreate.vue';
+import FormInvite from './partials/FormInvite.vue';
 import {
   Tabs,
   TabsContent,
@@ -19,7 +20,7 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: route('administration.users.index'),
     },
     {
-        title: trans('New User'),
+        title: trans('New :object', { object: trans('User')}),
         href: '/users',
     },
 ];
@@ -33,7 +34,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <Head :title="$t('New User')" />
+    <Head :title="$t('New :object', {object: $t('User')})" />
     
     <AppLayout :breadcrumbs="breadcrumbs">
       <div class="px-4 py-6">
@@ -41,14 +42,14 @@ const props = defineProps<{
 
         <Tabs default-value="account" class="w-[400px]">
             <TabsList class="grid w-full grid-cols-2">
-                <TabsTrigger value="account">Account</TabsTrigger>
+                <TabsTrigger value="account">{{ $t('Register :object', { object: $t('User') }) }}</TabsTrigger>
                 <TabsTrigger value="password">{{ $t('Invite') }}</TabsTrigger>
             </TabsList>
             <TabsContent value="account">
                 <FormCreate :roles="props.roles" />
             </TabsContent>
             <TabsContent value="password">
-                <p>Hola</p>
+                <FormInvite :roles="props.roles" />
             </TabsContent>
         </Tabs>
 

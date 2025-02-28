@@ -47,8 +47,11 @@
     "Whoops!": "¡Ups!",
     "You are receiving this email because we received a password reset request for your account.": "Estás recibiendo este correo electrónico porque recibimos una solicitud de restablecimiento de contraseña para tu cuenta.",
     "Password": "Contraseña",
+    "Re-Type Password": "Repite la contraseña",
+    "Confirm Password": "Confirmar contraseña",
     "Administration": "Administración",
     "Users": "Usuarios",
+    "User": "Usuario",
     "Platform": "Plataforma",
     "Name": "Nombre",
     "Created At": "Creado el",
@@ -56,6 +59,11 @@
     "Create": "Crear",
     "Email Address": "Correo Electrónico",
     "Invite": "Invitar",
-    "Register \":object\"": "Registrar \":object\""
+    "Register :object": "Registrar :object",
+    "New :object": "Nuevo :object",
+    "Create :object": "Crear :object",
+    "Already have an account?": "¿Ya tienes una cuenta?",
+    "Sign in": "Iniciar sesión",
+    "Create Account": "Crear Cuenta"
 
 }
