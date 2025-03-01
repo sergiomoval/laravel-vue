@@ -100,7 +100,7 @@ const columns: ColumnDef<typeof UserModel>[] = [
     <AppLayout :breadcrumbs="breadcrumbs">
       <div class="px-4 py-6">
         <Heading :title="$t('Users')" description="Manage your profile and account settings" />
-
+        
         <div class="flex justify-end mb-4">
           <Button as-child>
             <Link :href="route('administration.users.create')">
