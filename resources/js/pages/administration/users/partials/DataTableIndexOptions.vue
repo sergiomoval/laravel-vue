@@ -2,6 +2,7 @@
 import { MoreHorizontal } from 'lucide-vue-next'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
+import { Link } from '@inertiajs/vue3';
 
 defineProps<{
   dataRow: {
@@ -23,13 +24,12 @@ function copy(id: string) {
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent align="end">
-      <DropdownMenuLabel>Actions</DropdownMenuLabel>
-      <DropdownMenuItem @click="copy(dataRow.id)">
-        Copy payment ID
-      </DropdownMenuItem>
+      <DropdownMenuLabel>{{ $t('Actions') }}</DropdownMenuLabel>
       <DropdownMenuSeparator />
-      <DropdownMenuItem>View customer</DropdownMenuItem>
-      <DropdownMenuItem>View payment details</DropdownMenuItem>
+      <DropdownMenuItem>
+        <Link :href="route('administration.users.edit', { id: dataRow.id })">{{ $t('Edit :object', {'object': $t('User')}) }}</Link>
+      </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
+
 </template>

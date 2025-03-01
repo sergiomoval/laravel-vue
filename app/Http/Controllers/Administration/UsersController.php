@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Administration;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Administration\Users\DestroyUserRequest;
 use App\Http\Requests\Administration\Users\StoreInviteUserRequest;
 use App\Http\Requests\Administration\Users\StorePostRequest;
+use App\Http\Requests\Administration\Users\UpdateUserRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Yajra\DataTables\DataTables;
@@ -49,7 +51,7 @@ class UsersController extends Controller
         $user = User::create($request->all());
         $user->assignRole($request['rol']);
 
-        return $request->all();
+        return redirect()->route('administration.users.index')->with('success', Lang::get('User created successfully'));
     }
 
     /**
@@ -65,23 +67,41 @@ class UsersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::withTrashed()->find($id);
+        if (!$user) {
+            return redirect()->route('administration.users.index')->with('error', Lang::get('User specified was not found'));
+        }
+        $roles = Role::all();
+        return Inertia::render('administration/users/Edit', ['user' => $user->load('roles'), 'roles' => $roles]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, string $id)
     {
-        //
+        $user = User::find($id);
+        $user->update($request->all());
+        $user->syncRoles(array($request['rol']));
+        return redirect()->route('administration.users.index')->with('success', Lang::get('User modified successfully'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(DestroyUserRequest $request, string $id)
     {
-        //
+        $user = User::withTrashed()->find($id);
+        if ($user) {
+            if ($request['_type'] == 'DELETE') {
+                $user->delete();
+            } else if ($request['_type'] == 'RESTORE') {
+                $user->restore();
+            }
+            return redirect()->route('administration.users.index')->with('success', Lang::get('User modified successfully'));
+        } else {
+            return redirect()->route('administration.users.index')->with('error', Lang::get('User specified was not found'));
+        }
     }
 
     public function invite(StoreInviteUserRequest $request)
@@ -121,6 +141,8 @@ class UsersController extends Controller
                 $query->orderBy($sort['id'], $sort['desc'] ? 'desc' : 'asc');
             }
         }
+
+        $query->withTrashed();
 
         $query->with('roles:name');
 

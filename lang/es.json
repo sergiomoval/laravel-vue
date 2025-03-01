@@ -61,9 +61,19 @@
     "Invite": "Invitar",
     "Register :object": "Registrar :object",
     "New :object": "Nuevo :object",
+    "Delete :object": "Eliminar :object",
     "Create :object": "Crear :object",
+    "Edit :object": "Editar :object",
+    "Restore :object": "Restaurar :object",
     "Already have an account?": "¿Ya tienes una cuenta?",
     "Sign in": "Iniciar sesión",
-    "Create Account": "Crear Cuenta"
+    "Create Account": "Crear Cuenta",
+    "Actions": "Acciones",
+    "Delete": "Eliminar",
+    "Cancel": "Cancelar",
+    "Restore": "Restaurar",
+    "Are you sure?": "¿Estás seguro?",
+    "The user will be denied access to the platform": "El usuario no tendrá acceso a la plataforma",
+    "The user will be granted access to the platform": "El usuario tendrá acceso a la plataforma"
 
 }
