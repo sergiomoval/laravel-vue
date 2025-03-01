@@ -29,6 +29,7 @@ const UserModel = {
     email: '',
     created_at: '',
     updated_at: '',
+    deleted_at: '',
     roles: []
 }
 
@@ -52,6 +53,14 @@ const columns: ColumnDef<typeof UserModel>[] = [
       }, () => ['Email', h(ArrowUpDown, { class: 'ml-2 h-4 w-4' })])
     },
     cell: ({ row }) => h('div', { class: 'text-left font-medium lowercase' }, row.getValue('email')),
+  },
+  {
+    accessorKey: 'deleted_at',
+    header: () => h('div', { class: 'text-left' }, 'Estatus'),
+    cell: ({ row }) => {
+      const status = row.getValue('deleted_at') ? trans('Deleted') : trans('Active')
+      return h('div', { class: 'text-left font-medium' }, status)
+    },
   },
   {
     accessorKey: 'roles',
