@@ -9,11 +9,7 @@ use App\Http\Requests\Administration\Users\StorePostRequest;
 use App\Http\Requests\Administration\Users\UpdateUserRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Yajra\DataTables\DataTables;
 use App\Models\User;
-use Barryvdh\Debugbar\Facades\Debugbar;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use App\Models\Invite;
 use App\Notifications\Administration\Users\InviteNotification;
@@ -143,7 +139,6 @@ class UsersController extends Controller
         }
 
         $query->withTrashed();
-
         $query->with('roles:name');
 
         $pageSize = $request->input('pageSize', 10);

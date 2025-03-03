@@ -111,7 +111,6 @@ const columns: ColumnDef<typeof UserModel>[] = [
 
         <TanStackTable
           :url="route('administration.users.data-table')"
-          :model="UserModel"
           :columns="columns"
         />
       </div> 

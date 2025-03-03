@@ -9,8 +9,14 @@ import type {
 import { valueUpdater } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
-
 import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import {
   Table,
   TableBody,
@@ -28,14 +34,12 @@ import {
   getSortedRowModel,
   useVueTable,
 } from '@tanstack/vue-table'
-import { ArrowUpDown } from 'lucide-vue-next'
-import { h, ref, watchEffect } from 'vue'
-import axios from 'axios';
+import {ref, watchEffect, computed } from 'vue'
+import axios from 'axios'
 
 const props = defineProps<{
-    url: string,
-    model: typeof T,
-    columns: ColumnDef<T>[],
+  url: string,
+  columns: ColumnDef<T>[],
 }>()
 
 const data = ref<T[]>([])
@@ -47,18 +51,20 @@ const fetchData = async (params: any) => {
   totalRows.value = response.data.total
 }
 
-
 const sorting = ref<SortingState>([])
 const columnFilters = ref<ColumnFiltersState>([])
 const columnVisibility = ref<VisibilityState>({})
 const rowSelection = ref({})
 const expanded = ref<ExpandedState>({})
-const pageIndex = ref(0)
-const pageSize = ref(10)
+const pagination = ref({ pageIndex: 0, pageSize: 10 })
+const rowCount = computed(() => totalRows.value)
+
 
 const table = useVueTable({
   data: data,
   columns: props.columns,
+  rowCount: rowCount.value,
+  manualPagination: true,
   getCoreRowModel: getCoreRowModel(),
   getPaginationRowModel: getPaginationRowModel(),
   getSortedRowModel: getSortedRowModel(),
@@ -69,22 +75,21 @@ const table = useVueTable({
   onColumnVisibilityChange: updaterOrValue => valueUpdater(updaterOrValue, columnVisibility),
   onRowSelectionChange: updaterOrValue => valueUpdater(updaterOrValue, rowSelection),
   onExpandedChange: updaterOrValue => valueUpdater(updaterOrValue, expanded),
+  onPaginationChange: updaterOrValue => valueUpdater(updaterOrValue, pagination),
   state: {
     get sorting() { return sorting.value },
     get columnFilters() { return columnFilters.value },
     get columnVisibility() { return columnVisibility.value },
     get rowSelection() { return rowSelection.value },
     get expanded() { return expanded.value },
-    get pageIndex() { return pageIndex.value },
-    get pageSize() { return pageSize.value },
-    
+    get pagination() { return pagination.value },
   },
 })
 
 watchEffect(() => {
   fetchData({
-    page: pageIndex.value + 1,
-    pageSize: pageSize.value,
+    page: pagination.value.pageIndex + 1,
+    pageSize: pagination.value.pageSize,
     sorting: sorting.value,
     filters: columnFilters.value,
   })
@@ -100,6 +105,7 @@ watchEffect(() => {
         :model-value="table.getColumn('name')?.getFilterValue() as string"
         @update:model-value=" table.getColumn('name')?.setFilterValue($event)"
       />
+      
     </div>
     <div class="rounded-md border grid grid-cols-1">
       <Table>
@@ -128,7 +134,7 @@ watchEffect(() => {
 
           <TableRow v-else>
             <TableCell
-              :colspan="columns.length"
+              :colspan="props.columns.length"
               class="h-24 text-center"
             >
               No results.
@@ -162,5 +168,9 @@ watchEffect(() => {
         </Button>
       </div>
     </div>
+
+
+    
+
   </div>
 </template>
