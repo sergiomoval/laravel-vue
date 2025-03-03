@@ -76,6 +76,15 @@
     "Restore": "Restaurar",
     "Are you sure?": "¿Estás seguro?",
     "The user will be denied access to the platform": "El usuario no tendrá acceso a la plataforma",
-    "The user will be granted access to the platform": "El usuario tendrá acceso a la plataforma"
-
+    "The user will be granted access to the platform": "El usuario tendrá acceso a la plataforma",
+    "Forgot password?": "¿Olvidaste tu contraseña?",
+    "Enter your email and password below to log in": "Ingresa tu correo electrónico y contraseña a continuación para iniciar sesión",
+    "Log In": "Iniciar Sesión",
+    "Log in to your account": "Inicia sesión en tu cuenta",
+    "Remember me": "Recuérdame",
+    "Don't have an account?": "¿No tienes una cuenta?",
+    "Sign up": "Regístrate",
+    "Enter your details below to create your account": "Ingresa tus datos a continuación para crear tu cuenta",
+    "Create an account": "Crear una cuenta",
+    "Account": "Cuenta"
 }
