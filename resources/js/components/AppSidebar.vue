@@ -14,11 +14,13 @@ const mainNavItems: NavItem[] = [
         title: trans('Users'),
         href: '/administration/users',
         icon: Users,
+        permission: 'users_view',
     },
     {
         title: 'Dashboard',
         href: '/dashboard',
         icon: LayoutGrid,
+        permission: 'dashboard_view',
     },
 ];
 

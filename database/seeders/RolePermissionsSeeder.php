@@ -15,13 +15,14 @@ class RolePermissionsSeeder extends Seeder
     public function run(): void
     {
         $userPermissions = [
-            Permission::create(['name' => 'users_view']),  
+            Permission::create(['name' => 'dashboard_view']),
+            Permission::create(['name' => 'users_view']),
             Permission::create(['name' => 'users_edit']),
             Permission::create(['name' => 'users_create']),
             Permission::create(['name' => 'users_delete']),
             Permission::create(['name' => 'users_restore']),
         ];
-        $roleAdmin = Role::create(['name' => 'Administrator', 'home_page' => '/'])->givePermissionTo(Permission::all());
-        $roleUser = Role::create(['name' => 'User', 'home_page' => '/'])->givePermissionTo(['users_view']);
+        $roleAdmin = Role::create(['name' => 'Administrator', 'home_page' => '/administration/users'])->givePermissionTo(Permission::all());
+        $roleUser = Role::create(['name' => 'User', 'home_page' => '/dashboard'])->givePermissionTo(['dashboard_view']);
     }
 }
