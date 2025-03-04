@@ -8,11 +8,22 @@ import { Label } from '@/components/ui/label';
 import AuthBase from '@/layouts/AuthLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { loadLanguageAsync, getActiveLanguage } from 'laravel-vue-i18n';
 
 defineProps<{
     status?: string;
     canResetPassword: boolean;
 }>();
+
 
 const form = useForm({
     email: '',
@@ -25,6 +36,10 @@ const submit = () => {
         onFinish: () => form.reset('password'),
     });
 };
+
+const handleLanguageChange = (value: string) => {
+    loadLanguageAsync(value);
+};
 </script>
 
 <template>
@@ -33,6 +48,21 @@ const submit = () => {
 
         <div v-if="status" class="mb-4 text-center text-sm font-medium text-green-600">
             {{ status }}
+        </div>
+
+        <div class="flex justify-end">
+            <Select :defaultValue="getActiveLanguage()" @update:model-value="handleLanguageChange" class="w-full max-w-xs">
+                <SelectTrigger class="w-[120px]">
+                    <SelectValue :placeholder="$t('Select a language')" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectGroup>
+                    <SelectLabel>{{ $t('Languages') }}</SelectLabel>
+                    <SelectItem value="es">{{ $t('Spanish') }}</SelectItem>
+                    <SelectItem value="en">{{ $t('English') }}</SelectItem>
+                    </SelectGroup>
+                </SelectContent>
+            </Select>
         </div>
 
         <form @submit.prevent="submit" class="flex flex-col gap-6">

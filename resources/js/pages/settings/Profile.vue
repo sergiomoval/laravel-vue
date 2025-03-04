@@ -11,7 +11,16 @@ import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { type BreadcrumbItem, type SharedData, type User } from '@/types';
-import { trans } from 'laravel-vue-i18n';
+import { trans, loadLanguageAsync } from 'laravel-vue-i18n';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 interface Props {
     mustVerifyEmail: boolean;
@@ -34,7 +43,12 @@ const user = page.props.auth.user as User;
 const form = useForm({
     name: user.name,
     email: user.email,
+    locale: user.locale,
 });
+
+const handleLanguageChange = (value: string) => {
+    loadLanguageAsync(value);
+};
 
 const submit = () => {
     form.patch(route('profile.update'), {
@@ -71,6 +85,24 @@ const submit = () => {
                         />
                         <InputError class="mt-2" :message="form.errors.email" />
                     </div>
+                    
+                    <div class="grid gap-2">
+                        <Label for="email">{{ $t('Language') }}</Label>
+
+                        <Select :defaultValue="user.locale" @update:model-value="handleLanguageChange" v-model="form.locale" class="w-full max-w-xs">
+                            <SelectTrigger class="w-[140px]">
+                                <SelectValue :placeholder="$t('Select a language')" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                <SelectLabel>{{ $t('Languages') }}</SelectLabel>
+                                <SelectItem value="es">{{ $t('Spanish') }}</SelectItem>
+                                <SelectItem value="en">{{ $t('English') }}</SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </div>
+                    
 
                     <div v-if="mustVerifyEmail && !user.email_verified_at">
                         <p class="-mt-4 text-sm text-muted-foreground">
