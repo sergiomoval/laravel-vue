@@ -50,7 +50,7 @@ onMounted(() => {
     
     <AppLayout :breadcrumbs="breadcrumbs">
       <div class="px-4 py-6">
-        <Heading :title="$t('Users')" description="Manage your profile and account settings" />
+        <Heading :title="$t('Users')" :description="$t('Access and user management')" />
         
 
         <Tabs default-value="edit" class="w-[400px]">

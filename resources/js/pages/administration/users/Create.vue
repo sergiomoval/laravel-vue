@@ -38,7 +38,7 @@ const props = defineProps<{
     
     <AppLayout :breadcrumbs="breadcrumbs">
       <div class="px-4 py-6">
-        <Heading :title="$t('Users')" description="Manage your profile and account settings" />
+        <Heading :title="$t('Users')" :description="$t('Access and user management')" />
 
         <Tabs default-value="account" class="w-[400px]">
             <TabsList class="grid w-full grid-cols-2">
