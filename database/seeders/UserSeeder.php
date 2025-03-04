@@ -22,5 +22,13 @@ class UserSeeder extends Seeder
         $user->email_verified_at = Carbon::now();
         $user->assignRole('Administrator');
         $user->save();
+
+        $user = new User();
+        $user->name = 'Usuario Demo';
+        $user->email = 'user@demo.com';
+        $user->password = Hash::make('demo');
+        $user->email_verified_at = Carbon::now();
+        $user->assignRole('User');
+        $user->save();
     }
 }
