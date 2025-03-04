@@ -5,16 +5,23 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { Users, Folder, LayoutGrid } from 'lucide-vue-next';
+import { Users, Folder, LayoutGrid, Settings } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 import { trans } from 'laravel-vue-i18n';
 
 const mainNavItems: NavItem[] = [
     {
-        title: trans('Users'),
-        href: '/administration/users',
-        icon: Users,
+        title: trans('Administration'),
+        href: '/administration',
+        icon: Settings,
         permission: 'users_view',
+        items: [
+            {
+                title: trans('Users'),
+                href: '/administration/users',
+                permission: 'users_view',
+            }
+        ]
     },
     {
         title: 'Dashboard',

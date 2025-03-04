@@ -16,6 +16,14 @@ export interface NavItem {
     icon?: LucideIcon;
     isActive?: boolean;
     permission?: string;
+    items?: SubNavItem[];
+}
+
+export interface SubNavItem {
+    title: string;
+    href: string;
+    isActive?: boolean;
+    permission?: string;
 }
 
 export interface SharedData extends PageProps {
