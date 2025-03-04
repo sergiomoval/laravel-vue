@@ -102,6 +102,8 @@ const columns: ColumnDef<typeof UserModel>[] = [
   },
 ]
 
+const columnSearch = 'name'
+
 </script>
 
 <template>
@@ -122,6 +124,7 @@ const columns: ColumnDef<typeof UserModel>[] = [
         <TanStackTable
           :url="route('administration.users.data-table')"
           :columns="columns"
+          :columnSearch="columnSearch"
         />
       </div> 
 

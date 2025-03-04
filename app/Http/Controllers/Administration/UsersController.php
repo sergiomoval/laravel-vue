@@ -129,7 +129,7 @@ class UsersController extends Controller
 
         if ($request->has('filters')) {
             foreach ($request->filters as $filter) {
-                $query->where($filter['id'], 'like', '%' . $filter['value'] . '%');
+                $query->where($filter['id'], 'ilike', '%' . $filter['value'] . '%');
             }
         }
         if ($request->has('sorting')) {

@@ -40,6 +40,7 @@ import axios from 'axios'
 const props = defineProps<{
   url: string,
   columns: ColumnDef<T>[],
+  columnSearch: string
 }>()
 
 const data = ref<T[]>([])
@@ -101,9 +102,9 @@ watchEffect(() => {
     <div class="flex items-center py-4">
       <Input
         class="max-w-sm"
-        placeholder="Filter emails..."
-        :model-value="table.getColumn('name')?.getFilterValue() as string"
-        @update:model-value=" table.getColumn('name')?.setFilterValue($event)"
+        :placeholder="$t('Search')"
+        :model-value="table.getColumn(props.columnSearch)?.getFilterValue() as string"
+        @update:model-value=" table.getColumn(props.columnSearch)?.setFilterValue($event)"
       />
       
     </div>
