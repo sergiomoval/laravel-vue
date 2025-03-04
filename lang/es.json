@@ -28,7 +28,7 @@
     "Please click the button below to verify your email address.": "Por favor, haz clic en el botón de abajo para verificar tu dirección de correo electrónico.",
     "Regards,": "Saludos,",
     "Register": "Registrarse",
-    "Reset Password": "Restablecer contraseña",
+    "Reset Password": "Restablecer Contraseña",
     "Reset Password Notification": "Notificación de restablecimiento de contraseña",
     "results": "resultados",
     "Server Error": "Error del servidor",
@@ -86,5 +86,17 @@
     "Sign up": "Regístrate",
     "Enter your details below to create your account": "Ingresa tus datos a continuación para crear tu cuenta",
     "Create an account": "Crear una cuenta",
-    "Account": "Cuenta"
+    "Account": "Cuenta",
+    "Verify email": "Verificar dirección de correo electrónico",
+    "Log out": "Cerrar sesión",
+    "Resend verification email": "Reenviar correo de verificación",
+    "A new verification link has been sent to the email address you provided during registration": "Se ha enviado un nuevo enlace de verificación a la dirección de correo electrónico que proporcionaste durante el registro",
+    "Please verify your email address by clicking on the link we just emailed to you": "Por favor, verifica tu dirección de correo electrónico haciendo clic en el enlace que acabamos de enviarte por correo electrónico",
+    "Email verification": "Verificación de correo electrónico",
+    "Forgot password": "Olvidé mi contraseña",
+    "Enter your email to receive a password reset link": "Ingresa tu correo electrónico para recibir un enlace de restablecimiento de contraseña",
+    "Send reset link": "Enviar enlace de restablecimiento",
+    "Or, return to": "O regresa a",
+    "Please enter your new password below": "Por favor, ingresa tu nueva contraseña a continuación",
+    "Don’t have an account?": "¿No tienes una cuenta?"
 }
