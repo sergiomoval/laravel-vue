@@ -11,6 +11,7 @@ import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { type BreadcrumbItem, type SharedData, type User } from '@/types';
+import { trans } from 'laravel-vue-i18n';
 
 interface Props {
     mustVerifyEmail: boolean;
@@ -22,7 +23,7 @@ defineProps<Props>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Profile settings',
+        title: trans('Profile settings'),
         href: '/settings/profile',
     },
 ];
@@ -44,21 +45,21 @@ const submit = () => {
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <Head title="Profile settings" />
+        <Head :title="$t('Profile settings')" />
 
         <SettingsLayout>
             <div class="flex flex-col space-y-6">
-                <HeadingSmall title="Profile information" description="Update your name and email address" />
+                <HeadingSmall :title="$t('Profile information')" :description="$t('Update your name and email address and language')" />
 
                 <form @submit.prevent="submit" class="space-y-6">
                     <div class="grid gap-2">
-                        <Label for="name">Name</Label>
+                        <Label for="name">{{ $t('Name') }}</Label>
                         <Input id="name" class="mt-1 block w-full" v-model="form.name" required autocomplete="name" placeholder="Full name" />
                         <InputError class="mt-2" :message="form.errors.name" />
                     </div>
 
                     <div class="grid gap-2">
-                        <Label for="email">Email address</Label>
+                        <Label for="email">{{ $t('Email Address') }}</Label>
                         <Input
                             id="email"
                             type="email"
@@ -90,7 +91,7 @@ const submit = () => {
                     </div>
 
                     <div class="flex items-center gap-4">
-                        <Button :disabled="form.processing">Save</Button>
+                        <Button :disabled="form.processing">{{ $t('Save') }}</Button>
 
                         <TransitionRoot
                             :show="form.recentlySuccessful"
@@ -99,7 +100,7 @@ const submit = () => {
                             leave="transition ease-in-out"
                             leave-to="opacity-0"
                         >
-                            <p class="text-sm text-neutral-600">Saved.</p>
+                            <p class="text-sm text-neutral-600">{{ $t('Saved') }}.</p>
                         </TransitionRoot>
                     </div>
                 </form>

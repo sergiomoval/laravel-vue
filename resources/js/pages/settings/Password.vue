@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { type BreadcrumbItem } from '@/types';
+import { trans } from 'laravel-vue-i18n';
 
 interface Props {
     className?: string;
@@ -20,7 +21,7 @@ defineProps<Props>();
 
 const breadcrumbItems: BreadcrumbItem[] = [
     {
-        title: 'Password settings',
+        title: trans('Password settings'),
         href: '/settings/password',
     },
 ];
@@ -59,15 +60,15 @@ const updatePassword = () => {
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbItems">
-        <Head title="Profile settings" />
+        <Head :title="$t('Profile settings')" />
 
         <SettingsLayout>
             <div class="space-y-6">
-                <HeadingSmall title="Update password" description="Ensure your account is using a long, random password to stay secure" />
+                <HeadingSmall :title="$t('Update :object', {object: $t('Password')})" :description="$t('Ensure your account is using a long, random password to stay secure')" />
 
                 <form @submit.prevent="updatePassword" class="space-y-6">
                     <div class="grid gap-2">
-                        <Label for="current_password">Current password</Label>
+                        <Label for="current_password">{{ $t('Current password') }}</Label>
                         <Input
                             id="current_password"
                             ref="currentPasswordInput"
@@ -75,13 +76,12 @@ const updatePassword = () => {
                             type="password"
                             class="mt-1 block w-full"
                             autocomplete="current-password"
-                            placeholder="Current password"
                         />
                         <InputError :message="form.errors.current_password" />
                     </div>
 
                     <div class="grid gap-2">
-                        <Label for="password">New password</Label>
+                        <Label for="password">{{ $t('New password') }}</Label>
                         <Input
                             id="password"
                             ref="passwordInput"
@@ -89,26 +89,24 @@ const updatePassword = () => {
                             type="password"
                             class="mt-1 block w-full"
                             autocomplete="new-password"
-                            placeholder="New password"
                         />
                         <InputError :message="form.errors.password" />
                     </div>
 
                     <div class="grid gap-2">
-                        <Label for="password_confirmation">Confirm password</Label>
+                        <Label for="password_confirmation">{{ $t('Confirm Password') }}</Label>
                         <Input
                             id="password_confirmation"
                             v-model="form.password_confirmation"
                             type="password"
                             class="mt-1 block w-full"
                             autocomplete="new-password"
-                            placeholder="Confirm password"
                         />
                         <InputError :message="form.errors.password_confirmation" />
                     </div>
 
                     <div class="flex items-center gap-4">
-                        <Button :disabled="form.processing">Save password</Button>
+                        <Button :disabled="form.processing">{{ $t('Save :object', {object: $t('Password')}) }}</Button>
 
                         <TransitionRoot
                             :show="form.recentlySuccessful"
