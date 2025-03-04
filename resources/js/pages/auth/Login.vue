@@ -114,7 +114,7 @@ const handleLanguageChange = (value: string) => {
 
             <div class="text-center text-sm text-muted-foreground">
                 {{ $t('Don’t have an account?') }}
-                <TextLink :href="route('register')" :tabindex="5">{{ $t('Sign up') }}</TextLink>
+                <TextLink :href="route('register')" :tabindex="5">{{ $t('Sign Up') }}</TextLink>
             </div>
         </form>
     </AuthBase>
