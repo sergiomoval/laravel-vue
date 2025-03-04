@@ -117,8 +117,8 @@ class UsersController extends Controller
         ]);
         $url = URL::temporarySignedRoute('registration', now()->addMinutes(300), ['token' => $token]);
 
-        Notification::route('mail', $request->input('email'))->notify(new InviteNotification($url));
-        //Notification::route('mail', $request->input('email'))->notify((new InviteNotification($url))->locale($request->input('locale')));
+        //Notification::route('mail', $request->input('email'))->notify(new InviteNotification($url));
+        Notification::route('mail', $request->input('email'))->notify((new InviteNotification($url))->locale($request->input('locale')));
 
         return redirect()->route('administration.users.index')->with('success', Lang::get('Invitation sent by email'));
     }

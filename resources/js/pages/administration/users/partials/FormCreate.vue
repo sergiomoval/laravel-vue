@@ -30,6 +30,7 @@ const form = useForm({
     password: null,
     password_confirmation: null,
     rol: null,
+    locale: null,
 });
 const register = () => form.post(route('administration.users.store'));
 
@@ -86,6 +87,18 @@ const register = () => form.post(route('administration.users.store'));
                                 <SelectItem v-for="rol in props.roles" :key="rol.id" :value="rol.name">
                                 {{ rol.name }}
                                 </SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+                    <div class="flex flex-col space-y-1.5">
+                        <Label for="role">{{ $t('Language') }}</Label>
+                        <Select defaultValue="es" v-model="form.locale">
+                            <SelectTrigger id="locale">
+                                <SelectValue :placeholder="$t('Select')" />
+                            </SelectTrigger>
+                            <SelectContent position="popper">
+                                <SelectItem value="es">{{ $t('Spanish') }}</SelectItem>
+                                <SelectItem value="en">{{ $t('English') }}</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
