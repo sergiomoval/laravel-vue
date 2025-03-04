@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
+use Carbon\Carbon;
+use Spatie\Permission\Models\Role;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -32,6 +34,18 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        $user = $request->user();
+        $user->last_login = Carbon::now()->toDateTimeString();
+        $user->save();
+
+        session()->put('locale', Auth::user()->locale);
+
+        $roles = $user->getRoleNames();
+        if (count($roles) >= 1) {
+            $rol = Role::where('name', $roles[0])->first();
+            return redirect($rol->home_page);
+        }
 
         return redirect()->intended(route('dashboard', absolute: false));
     }
