@@ -30,6 +30,7 @@ const UserModel = {
     created_at: '',
     updated_at: '',
     deleted_at: '',
+    last_login: '',
     roles: []
 }
 
@@ -68,6 +69,15 @@ const columns: ColumnDef<typeof UserModel>[] = [
     cell: ({ row }) => {
       const roles = row.getValue('roles') as { name: string }[]
       return h('div', { class: 'text-left font-medium' }, roles[0].name)
+    },
+  },
+  {
+    accessorKey: 'last_login',
+    header: () => h('div', { class: 'text-left' }, trans('Last Login')),
+    cell: ({ row }) => {
+      const createdAt = new Date(row.getValue('last_login'));
+      const formattedDate = createdAt.toISOString().split('T')[0];
+      return h('div', { class: 'text-left font-medium' }, formattedDate)
     },
   },
   {
