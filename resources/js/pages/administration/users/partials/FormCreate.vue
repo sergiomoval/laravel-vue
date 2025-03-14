@@ -37,7 +37,7 @@ const register = () => form.post(route('administration.users.store'));
 </script>
 
 <template>
-    <Card class="w-full max-w-md">
+    <Card class="w-full">
         <CardHeader></CardHeader>
         <form @submit.prevent="register">
             <CardContent>

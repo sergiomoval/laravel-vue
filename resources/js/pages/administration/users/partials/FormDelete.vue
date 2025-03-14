@@ -30,7 +30,7 @@ const formDelete = () => form.delete(route('administration.users.destroy', props
 
 <template>
 
-<Card class="w-full max-w-md">
+<Card class="w-full">
     <CardContent>
         <div class="flex justify-center mt-10 mb-6">
             

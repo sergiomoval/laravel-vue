@@ -43,7 +43,7 @@ const edit = () => form.put(route('administration.users.update', props.user.id))
 </script>
 
 <template>
-    <Card class="w-full max-w-md">
+    <Card class="w-full">
         <CardHeader></CardHeader>
         <form @submit.prevent="edit">
             <CardContent>

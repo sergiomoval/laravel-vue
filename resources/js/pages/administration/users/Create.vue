@@ -40,18 +40,21 @@ const props = defineProps<{
       <div class="px-4 py-6">
         <Heading :title="$t('Users')" :description="$t('Access and user management')" />
 
-        <Tabs default-value="account" class="w-[400px]">
-            <TabsList class="grid w-full grid-cols-2">
-                <TabsTrigger value="account">{{ $t('Register :object', { object: $t('User') }) }}</TabsTrigger>
-                <TabsTrigger value="password">{{ $t('Invite') }}</TabsTrigger>
-            </TabsList>
-            <TabsContent value="account">
-                <FormCreate :roles="props.roles" />
-            </TabsContent>
-            <TabsContent value="password">
-                <FormInvite :roles="props.roles" />
-            </TabsContent>
-        </Tabs>
+        <div class="w-full md:w-1/2 lg:w-1/3">
+            <Tabs default-value="account" class="w-full">
+                <TabsList class="grid w-full grid-cols-2">
+                    <TabsTrigger value="account">{{ $t('Register :object', { object: $t('User') }) }}</TabsTrigger>
+                    <TabsTrigger value="password">{{ $t('Invite') }}</TabsTrigger>
+                </TabsList>
+                <TabsContent value="account">
+                    <FormCreate :roles="props.roles" />
+                </TabsContent>
+                <TabsContent value="password">
+                    <FormInvite :roles="props.roles" />
+                </TabsContent>
+            </Tabs>
+        </div>
+        
 
       </div> 
 

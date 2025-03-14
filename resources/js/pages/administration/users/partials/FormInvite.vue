@@ -32,7 +32,7 @@ const invite = () => form.post(route('administration.users.invite'));
 </script>
 
 <template>
-    <Card class="w-full max-w-md">
+    <Card class="w-full">
         <CardHeader></CardHeader>
         <form @submit.prevent="invite">
             <CardContent>

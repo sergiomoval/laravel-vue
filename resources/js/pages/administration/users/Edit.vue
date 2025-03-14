@@ -52,20 +52,23 @@ onMounted(() => {
       <div class="px-4 py-6">
         <Heading :title="$t('Users')" :description="$t('Access and user management')" />
         
-
-        <Tabs default-value="edit" class="w-[400px]">
-            <TabsList class="grid w-full grid-cols-2">
-                <TabsTrigger value="edit">{{ $t('Edit :object', { object: $t('User') }) }}</TabsTrigger>
-                <TabsTrigger v-if="action == 'DELETE'"  value="action">{{ $t('Delete') }}</TabsTrigger>
-                <TabsTrigger v-else value="action">{{ $t('Restore') }}</TabsTrigger>
-            </TabsList>
-            <TabsContent value="edit">
-                <FormEdit :user="props.user" :roles="props.roles" />
-            </TabsContent>
-            <TabsContent value="action">
-                <FormDelete :user="props.user" :action="action" />
-            </TabsContent>
-        </Tabs>
+        
+        <div class="w-full md:w-1/2 lg:w-1/3">
+            <Tabs default-value="edit" class="w-full">
+                <TabsList class="grid w-full grid-cols-2">
+                    <TabsTrigger value="edit">{{ $t('Edit :object', { object: $t('User') }) }}</TabsTrigger>
+                    <TabsTrigger v-if="action == 'DELETE'"  value="action">{{ $t('Delete') }}</TabsTrigger>
+                    <TabsTrigger v-else value="action">{{ $t('Restore') }}</TabsTrigger>
+                </TabsList>
+                <TabsContent value="edit">
+                    <FormEdit :user="props.user" :roles="props.roles" />
+                </TabsContent>
+                <TabsContent value="action">
+                    <FormDelete :user="props.user" :action="action" />
+                </TabsContent>
+            </Tabs>
+        </div>
+        
         
       </div> 
 
